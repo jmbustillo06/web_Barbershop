@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block title %}Mis citas{% endblock %}
+
+{% block content %}
+<div class="header-seccion">
+    <h2>Mis citas</h2>
+    <a href="{% url 'crear_cita' %}" class="btn-secundario">+ Nueva cita</a>
+</div>
+
+<div class="grid-citas">
+    {% for cita in citas %}
+    <div class="cita-card">
+        <p><strong>Fecha:</strong> {{ cita.fecha }}</p>
+        <p><strong>Hora:</strong> {{ cita.hora }}</p>
+        <p><strong>Servicio:</strong> {{ cita.servicio }}</p>
+
+        <p class="estado {{ cita.estado }}">
+            {{ cita.estado|capfirst }}
+        </p>
+
+        {% if cita.estado != 'cancelada' %}
+        <a href="{% url 'cancelar_cita' cita.id %}" class="link-cancelar">
+            Cancelar
+        </a>
+        {% endif %}
+    </div>
+    {% empty %}
+    <p>No tienes citas registradas.</p>
+    {% endfor %}
+</div>
+{% endblock %}

@@ -1,0 +1,27 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}BARBERSHOP{% endblock %}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/estilos.css' %}">
+</head>
+<body>
+
+<header class="navbar">
+    <h1 class="logo">BARBERÍA</h1>
+    {% if user.is_authenticated %}
+        <nav>
+            <a href="{% url 'listar_citas' %}">Mis citas</a>
+            <a href="{% url 'logout' %}">Salir</a>
+        </nav>
+    {% endif %}
+</header>
+
+<main class="contenedor">
+    {% block content %}{% endblock %}
+</main>
+
+</body>
+</html>
